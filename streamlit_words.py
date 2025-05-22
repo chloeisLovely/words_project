@@ -11,7 +11,7 @@ font_path = "NanumGothic.ttf"
 font_url = "https://raw.githubusercontent.com/naver/nanumfont/master/ttf/NanumGothic.ttf"
 if not os.path.exists(font_path):
     try:
-        st.info("🔤 'NanumGothic.ttf' 폰트가 없어서 자동 다운로드 중입니다...")
+        st.info("'NanumGothic.ttf' 폰트가 없어서 자동 다운로드 중입니다...")
         urllib.request.urlretrieve(font_url, font_path)
         st.success("폰트 다운로드 완료!")
     except Exception:
@@ -20,7 +20,7 @@ if not os.path.exists(font_path):
         st.stop()
 
 st.set_page_config(page_title="한글 워드클라우드 생성기", layout="centered")
-st.title("☁️ 한글 워드클라우드 생성기 (형태소 분석 없이)")
+st.title("한글 워드클라우드 생성기")
 
 st.markdown("""
 이 대시보드는 한글 텍스트를 업로드하고, 선택한 마스크 이미지에 맞춰 워드클라우드를 생성합니다.  
