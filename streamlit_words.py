@@ -8,13 +8,14 @@ import os
 from konlpy.tag import Okt
 import urllib.request
 
-# ✅ 폰트 자동 다운로드
+# 폰트 자동 다운로드
 font_path = "NanumGothic.ttf"
 if not os.path.exists(font_path):
     st.info("🔤 'NanumGothic.ttf' 폰트가 없어서 자동 다운로드 중입니다...")
-    url = "https://github.com/naver/nanumfont/blob/master/ttf/NanumGothic.ttf?raw=true"
+    url = "https://raw.githubusercontent.com/naver/nanumfont/master/ttf/NanumGothic.ttf"
     urllib.request.urlretrieve(url, font_path)
-    st.success("✅ 폰트 다운로드 완료!")
+    st.success("폰트 다운로드 완료!")
+
 
 st.set_page_config(page_title="한글 워드클라우드 생성기", layout="centered")
 st.title("☁️ 한글 워드클라우드 생성기 (마스크 + 형태소 분석)")
@@ -31,24 +32,24 @@ uploaded_mask = st.file_uploader("🖼 마스크 이미지 업로드 (선택 사
 if uploaded_text is not None:
     text = uploaded_text.read().decode("utf-8")
 
-    # ✅ 형태소 분석 (명사만 추출)
+    # 형태소 분석 (명사만 추출)
     okt = Okt()
     nouns = okt.nouns(text)
     nouns = [n for n in nouns if len(n) > 1]
     text_nouns = " ".join(nouns)
 
-    # ✅ 마스크 이미지 처리
+    # 마스크 이미지 처리
     mask_array = None
     if uploaded_mask is not None:
         image = Image.open(uploaded_mask).convert("RGB")
         image = image.resize((800, 800))
         mask_array = np.array(image)
 
-    # ✅ 불용어 설정
+    # 불용어 설정
     stopwords = set(STOPWORDS)
     stopwords.update(["그리고", "하지만", "있다", "하는", "것", "수", "위한"])
 
-    # ✅ 워드클라우드 생성
+    # 워드클라우드 생성
     wc = WordCloud(
         font_path=font_path,
         background_color="white",
@@ -58,7 +59,7 @@ if uploaded_text is not None:
         mask=mask_array
     ).generate(text_nouns)
 
-    st.subheader("🎨 생성된 워드클라우드")
+    st.subheader("생성된 워드클라우드")
     fig, ax = plt.subplots(figsize=(10, 10))
     ax.imshow(wc, interpolation='bilinear')
     ax.axis("off")
