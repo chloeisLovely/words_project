@@ -19,11 +19,11 @@ if not os.path.exists(font_path):
 st.set_page_config(page_title="한글 워드클라우드 생성기", layout="centered")
 st.title("☁️ 한글 워드클라우드 생성기 (마스크 + 형태소 분석)")
 
-st.markdown(\"\"\"
+st.markdown("""
 이 대시보드는 한글 텍스트를 업로드하고, 선택한 마스크 이미지에 맞춰 워드클라우드를 생성합니다.  
 - `.txt` 파일로 텍스트를 업로드하세요  
 - `.png` 또는 `.jpg` 마스크 이미지를 업로드하면 해당 모양으로 클라우드가 생성됩니다  
-\"\"\")
+""")
 
 uploaded_text = st.file_uploader("📂 텍스트 파일 (.txt)을 업로드하세요", type="txt")
 uploaded_mask = st.file_uploader("🖼 마스크 이미지 업로드 (선택 사항, PNG/JPG)", type=["png", "jpg", "jpeg"])
